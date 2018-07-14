@@ -16,7 +16,7 @@
 title: YACB (Yet another Coding Blog)
 email: 
 description: >- # this means to ignore newlines until "baseurl:"
-  YACB is for the stuff and things that were learned by some developers who do stuff and things (although we mainly just bang on keyboards and question why we became developers in the first place).
+  Things learned through strenously banging on keys
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "yacb.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username:
