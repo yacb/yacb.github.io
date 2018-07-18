@@ -17,7 +17,7 @@ layout: post
 
 ## 1. Inherit from `IntegrationBaseTest`
 
-Creating an Integration Test begins with inheriting from `IntegrationBaseTest`. Begin the test in the `MiPlan.Tests.IntegrationTests` namespace:
+Creating an Integration Test begins with inheriting from `IntegrationBaseTest`. Begin the test in the `MiPlan.Tests.IntegrationTests` name-space:
 
     namespace MiPlan.Tests.IntegrationTests
     {
@@ -53,7 +53,7 @@ For this setup, we're using Xunit for tests, so we define a test with the `[Fact
 
 ## 4. Wrap entire test in `UITest(() => {})`
 
-Inside of the `IntegrationBaseTest`, we have a number of great utilities setup, once being the `UITest` method, which is going to assure we have a brand new server available, a browser to use, and a clear database. It also does cleanup and artifact gathering for us once the test is finished (sucessfully or not).
+Inside of the `IntegrationBaseTest`, we have a number of great utilities setup, once being the `UITest` method, which is going to assure we have a brand new server available, a browser to use, and a clear database. It also does cleanup and artifact gathering for us once the test is finished (successfully or not).
 
     ...
     [Fact]
@@ -94,7 +94,7 @@ To see all of the available methods, visit the [documentation](https://seleniumh
 
 ### Context
 
-In order to interact with the database, the `_context` handle is available in our tests. In order to test that the frontend is displaying data correctly, we need to have that data verifiably in the database first! This is done by Entity Framework calls directly:
+In order to interact with the database, the `_context` handle is available in our tests. In order to test that the frontend is displaying data correctly, we need to have that data in the database first! This is done by Entity Framework calls directly:
 
     var myThing = new Thing { title = "Thing Title" };
     _context.Thing.Add(myThing);
@@ -183,7 +183,7 @@ We can now use our page object to retrieve the header element on the page:
 
 ## 7. Assertions
 
-Continueing our example in the section above, we need to check the value of content on the page, we might need to click a few things to get the page in a certain state, but at the end of a test, you always have an assertion:
+Continuing our example in the section above, we need to check the value of content on the page, we might need to click a few things to get the page in a certain state, but at the end of a test, you always have an assertion:
 
     ...
     UITest(() => {
@@ -199,11 +199,11 @@ Continueing our example in the section above, we need to check the value of cont
 
 ## 8. Running the tests
 
-To actually run the tests, we use the command `dotnet test`, but this can be used with the `--filter` option to specificy a certain namespace:
+To actually run the tests, we use the command `dotnet test`, but this can be used with the `--filter` option to specify a certain name-space:
 
     dotnet test --filter "FullyQualifiedName~MiPlan.Tests.IntegrationTests"
 
-The above would run everything within the IntegrationTests namespace. This can be specified down to a certian class of tests, or even one single test.
+The above would run everything within the IntegrationTests name-space. This can be specified down to a certain class of tests, or even one single test.
 
 One important thing to note: Currently if you are not running the tests in Docker, you will have to start up a Selenium server and make sure the frontend is running on the correct port. I would like to include this inside of the framework itself, and a part of the test run eventually.
 
@@ -214,6 +214,6 @@ At the end of a test run, if there are any failures, there will be artifacts pro
   1. A Screenshot of the current failure
   2. Recording of the browser console
   3. Snapshot of the HTML when the failure happened
-  4. Stack trace of the system when the failure occured
+  4. Stack trace of the system when the failure occurred
 
 
