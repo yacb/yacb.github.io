@@ -157,8 +157,63 @@ _Note: `_frontendConfig` is provided by the base_
 
 Now that we have our page created, lets jump back into the page object file to create some methods to interface with our page:
 
+    ...
+    public MyNewPage(FrontendConfig frontendConfig, RemoteWebDriver remoteWebDriver) : base(frontendConfig, remoteWebDriver)
+    {
+      GoToUrl("/my-new-page");
+    }
 
+    public IWebElement GetHeader()
+    {
+      return _browser.FindElement(By.ClassName("header-element"));
+    }
+    ...
 
-## 7. Write Page setup and assertions
+We can now use our page object to retrieve the header element on the page:
+
+    ...
+    UITest(() => {
+
+      var myPage = new MyNewPage(_frontendConfig, Browser)
+
+      var header = myPage.GetHeader();
+
+    })
+    ...
+
+## 7. Assertions
+
+Continueing our example in the section above, we need to check the value of content on the page, we might need to click a few things to get the page in a certain state, but at the end of a test, you always have an assertion:
+
+    ...
+    UITest(() => {
+
+      var myPage = new MyNewPage(_frontendConfig, Browser)
+
+      var header = myPage.GetHeader();
+
+      Assert.Equal("My Expected Header Text", header.Text);
+
+    })
+    ... 
+
 ## 8. Running the tests
+
+To actually run the tests, we use the command `dotnet test`, but this can be used with the `--filter` option to specificy a certain namespace:
+
+    dotnet test --filter "FullyQualifiedName~MiPlan.Tests.IntegrationTests"
+
+The above would run everything within the IntegrationTests namespace. This can be specified down to a certian class of tests, or even one single test.
+
+One important thing to note: Currently if you are not running the tests in Docker, you will have to start up a Selenium server and make sure the frontend is running on the correct port. I would like to include this inside of the framework itself, and a part of the test run eventually.
+
 ## 9. Artifacts
+
+At the end of a test run, if there are any failures, there will be artifacts produced to help investigate why the test failed. These will be found in the `tmp` directory within the test project. You will find four different artifacts produced:
+
+  1. A Screenshot of the current failure
+  2. Recording of the browser console
+  3. Snapshot of the HTML when the failure happened
+  4. Stack trace of the system when the failure occured
+
+
